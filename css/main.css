@@ -1,0 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
+
+#header{
+    position: relative;
+    height: 55vh;
+    background-image: url("../img/15638897400_1421bcbf5a_h.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    max-width: 100%;
+}
+
+#title{
+    position: absolute;
+    left: 20px;
+    bottom: 5px;
+    font-family: 'Poiret One', cursive;
+    font-size: 5em;
+    text-shadow: 3px 3px 3px #000;
+    color: white;
+}

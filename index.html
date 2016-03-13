@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Innorz's Resturents Map</title>
+<meta name="description" content="Brackets 互動式入門指引。">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="css/main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <div id="title">
+            <span>Innorz's Resturents Map</span>
+        </div>
+    </div>
+    <div id="mapview"></div>
+</body>
+<script>
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('mapview'), {
+            center: {lat: 25.0411266, lng: 121.5379425},
+            zoom: 8
+        });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGyZQqFBD6Bm4t-p1oCkNf23eeCbrfh-4&callback=initMap"
+  type="text/javascript"></script>
+
+</html>
