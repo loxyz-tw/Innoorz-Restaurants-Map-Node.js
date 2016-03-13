@@ -34,3 +34,7 @@
 	opacity: 0.75;
 	padding: 1px;
 }
+
+#mapview {
+	height: 100%;
+}
