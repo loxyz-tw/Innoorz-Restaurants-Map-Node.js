@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Poiret+One);
+@import url(https://fonts.googleapis.com/css?family=Muli);
 
 #header{
     position: relative;
@@ -18,4 +19,18 @@
     font-size: 5em;
     text-shadow: 3px 3px 3px #000;
     color: white;
+}
+
+#photo-attribution{
+	bottom: 2px;
+	position: absolute;
+	right: 2px;
+}
+#photo-attribution a{
+	color: #fff;
+	background-color: #000;
+	font-size: 12px;
+	font-family: 'Muli', sans-serif;
+	opacity: 0.75;
+	padding: 1px;
 }
