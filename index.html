@@ -10,14 +10,17 @@
 </head>
 <body>
     <div id="header">
-        <div id="title">
-            <span>Innorz's Resturents Map</span>
-        </div>
-        <div id="photo-attribution" class="hide">
+        <div id="title"><span>Innorz's Resturents Map</span></div>
+        <div id="photo-attribution">
             <a href="https://www.flickr.com/photos/68711844@N07/15638897400/in/album-72157649298612516/" target="_blank">Photo by Michael Stern, CC-BY-SA</a>
 		</div>
     </div>
     <div id="mapview"></div>
+    <div class="container">
+        <div class="page-hader"><h1> 餐廳列表</h1><small>Resturents List</small></div>
+        <div class="row">
+        </div>
+    </div>
 </body>
 <script>
     var map;
@@ -25,7 +28,7 @@
         map = new google.maps.Map(document.getElementById('mapview'), {
             center: {lat: 25.041, lng: 121.538},
             scrollwheel: false,
-            zoom: 19
+            zoom: 17
         });
     }
 </script>
