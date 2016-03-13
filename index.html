@@ -11,26 +11,31 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="header">
-        <div id="title">
-            <span>Innorz's Resturents Map</span>
-        </div>
-        <div id="photo-attribution">
-            <a href="https://www.flickr.com/photos/68711844@N07/15638897400/in/album-72157649298612516/" target="_blank">Photo by Michael Stern, CC BY-SA</a>
-		</div>
-    </div>
-    <div id="mapview"></div>
-</body>
-<script>
-    var map;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('mapview'), {
-            center: {lat: 25.0411266, lng: 121.5379425},
-            zoom: 8
+	<style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
         });
-    }
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGyZQqFBD6Bm4t-p1oCkNf23eeCbrfh-4&callback=initMap"
-  type="text/javascript"></script>
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGyZQqFBD6Bm4t-p1oCkNf23eeCbrfh-4&callback=initMap&callback=initMap" async defer></script>
+  </body>
+
+</body>
 
 </html>
