@@ -2,37 +2,66 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Innorz's Resturents Map</title>
+<title>Innorz's Restaurants Map</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link rel="stylesheet" href="css/main.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<link rel="shortcut icon" type="image/png" href="./img/favicon.png"/>
 </head>
 <body>
     <div id="header">
-        <div id="title"><span>Innorz's Resturents Map</span></div>
+        <div id="title"><span>Innorz's Restaurants Map</span></div>
         <div id="photo-attribution">
             <a href="https://www.flickr.com/photos/68711844@N07/15638897400/in/album-72157649298612516/" target="_blank">Photo by Michael Stern, CC-BY-SA</a>
 		</div>
     </div>
     <div id="mapview"></div>
     <div class="container">
-        <div class="page-hader"><h1> 餐廳列表</h1><small>Resturents List</small></div>
+        <div class="page-header"><h1>新增餐廳 <small>Add Restaurant</small></h1></div>
+        <form id="restaurantform" class="form row" role="form">
+           <div class="restaurant-data col-md-10">
+                <div class="form-group col-md-3">
+                    <label class="sr-only">餐廳名稱</label>
+                    <input class="form-control input-lg" type="text" name="name" placeholder="餐廳名稱">
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="sr-only">餐廳地址</label>
+                    <input class="form-control input-lg" type="text" name="address" placeholder="餐廳地址">
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="sr-only">平均價格</label>
+                    <input class="form-control input-lg" type="text" name="price" placeholder="平均價格">
+               </div>
+            </div>
+            <div id="buttons" class="col-md-2">
+                <button id="plus" class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button id="submit" class="btn btn-primary btn-lg" type="submit">送出</button>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <div class="page-header"><h1>餐廳列表 <small>Restaurants List</small></h1></div>
         <div class="row">
+           <div class="col-md-12">
+            <table id="restaurant-list" class="table table-hover">
+                <thead><tr><th>餐廳名稱</th><th>餐廳地址</th><th>平均價格</th></tr></thead>
+                <tbody></tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div style="padding-bottom:10px;">
+            <div class="page-header"><h1>今天吃什麼？ <small>Today's launch is?</small></h1></div>
+            <div id="dochi"></div>
+            <button id="goButton" class="btn btn-primary btn-lg">開始選擇</button>
         </div>
     </div>
 </body>
-<script>
-    var map;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('mapview'), {
-            center: {lat: 25.041, lng: 121.538},
-            scrollwheel: false,
-            zoom: 17
-        });
-    }
-</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGyZQqFBD6Bm4t-p1oCkNf23eeCbrfh-4&callback=initMap"
         type="text/javascript"></script>
+<script src="./js/main.js"></script>
 </html>
 </html>

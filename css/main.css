@@ -1,6 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Poiret+One);
 @import url(https://fonts.googleapis.com/css?family=Muli);
 
+a{
+	color: #31A4FF;
+}
+
 #header{
     position: relative;
     height: 55vh;
@@ -37,4 +41,12 @@
 
 #mapview{
 	height: 500px;
+}
+
+table tbody tr td{
+    font-size: 18px;
+}
+
+#dochi {
+	font-size: 2em;
 }
