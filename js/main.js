@@ -1,5 +1,4 @@
 //Init List restaurants
-restaurantList();
 var restaurantData = [];
 var timer;
 
@@ -7,6 +6,7 @@ var timer;
 var geocoder;
 var map;
 var ResInfo = null;
+var info;
 
 //Init Googel Map
 function initMap() {
@@ -25,13 +25,20 @@ function initMap() {
     
     ResInfo = new google.maps.InfoWindow({content: "Innorz" });
     ResInfo.open(map, inno);
+    
+    inno.addListener('click', function() {
+         if(ResInfo)ResInfo.close();                
+         ResInfo = new google.maps.InfoWindow({content: "Innorz"});
+         ResInfo.open(map, inno);
+     }); 
+    restaurantList();
 }
 
 
 //Add a new row for insert restaurant data
 $("#plus").on("click",function(){
-    var clone = $(".restaurant-data:last").clone().find("input:text").val("").end()
-    $("#buttons").before(clone)
+    var clone = $(".restaurant-data:last").clone().find("input:text").val("").end();
+    $("#buttons").before(clone);
 })
 
 //Post data
@@ -42,18 +49,10 @@ $("form").submit(function(event) {
         var name = $("input[name='name']").eq(i).val()
         var address = $("input[name='address']").eq(i).val()
         var price = $("input[name='price']").eq(i).val()
-        restaurantArray.push({"name":name, "address":address, "price":price})
+        codeAddress(name,addressmprice);    
     }
-    console.log(restaurantData)
-    var json = JSON.stringify(restaurantArray)
-    
-    $.post("../handle.php",{
-        "json" : json
-    },function(data){
-        $("form")[0].reset();
-        $(".restaurant-data").not(":first").remove();
-    })
-    restaurantList();
+    $("form")[0].reset();
+    $(".restaurant-data").not(":first").remove();
     event.preventDefault();
 });
 
@@ -65,33 +64,47 @@ function restaurantList(){
             var restaurant = "";
             restaurant += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td>");
             tableRow += ("<tr>"+restaurant+"</tr>");
-            codeAddressAndAddMarker(data[i].name,data[i].address,data[i].price);
             restaurantData.push(data[i].name);
+            var latlng = {lat: data[i].lat,lng: data[i].lng};
+            var name = data[i].name;
+            var address = data[i].address;
+            var price = data[i].price;
+
+            var marker = new google.maps.Marker({
+                map: map,
+                animation : google.maps.Animation.DROP,
+                position: latlng
+            });
+            var content = "<h3>"+name+"</h3>"+
+                "<p>地址："+address+"</p>"+
+                "<p>平均價格："+price+"</p>";
+            
+            mapInfo(marker,map,content);
         }
         $("#restaurant-list tbody").html(tableRow);
     })
 }
 
+function mapInfo(marker,map,content){
+    info = new google.maps.InfoWindow();
+    marker.addListener('click', function() {
+        info.close();
+        info.setContent(content)
+        info.open(map, marker);
+    });
+}
+
 //Address Geocode and add marker
-function codeAddressAndAddMarker(name,address,price){
+function codeAddress(name,address,price){
     geocoder.geocode({"address":address},function(results,status){
         if(status == google.maps.GeocoderStatus.OK){
-            var marker = new google.maps.Marker({
-                map: map,
-                animation : google.maps.Animation.DROP,
-                position: results[0].geometry.location
+            var location = results[0].geometry.location.split(",");
+            var restaurantArray = [{"name":name, "address":address, lat: location[0],lng: location[1], "price":price}];
+            var json = JSON.stringify(restaurantArray)
+            $.post("../handle.php",{"json" : json},function(data){
+                restaurantList();
             });
-           
-            marker.addListener('click', function() {
-                if(ResInfo)ResInfo.close();
-        
-                var content = "<h3>"+name+"</h3>"+
-                "<p>地址："+address+"</p>"+
-                "<p>平均價格："+price+"</p>"
-                
-                ResInfo = new google.maps.InfoWindow({content: content});
-                ResInfo.open(map, marker);
-            }); 
+            
         }
     })
 }
