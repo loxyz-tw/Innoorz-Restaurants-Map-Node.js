@@ -1,27 +1,52 @@
-.jumbotron {
-  background: #532F8C;
-  color: white;
-  padding-bottom: 80px; }
-  .jumbotron .btn-primary {
-    background: #845ac7;
-    border-color: #845ac7; }
-    .jumbotron .btn-primary:hover {
-      background: #7646c1; }
-  .jumbotron p {
-    color: #d9ccee;
-    max-width: 75%;
-    margin: 1em auto 2em; }
-  .navbar + .jumbotron {
-    margin-top: -20px; }
-  .jumbotron .lang-logo {
-    display: block;
-    background: #B01302;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    border: 2px solid white; }
-    .jumbotron .lang-logo img {
-      max-width: 100%; }
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
+@import url(https://fonts.googleapis.com/css?family=Muli);
 
+a{
+	color: #31A4FF;
+}
+
+#header{
+    position: relative;
+    height: 55vh;
+    background-image: url("../img/15638897400_1421bcbf5a_h.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    max-width: 100%;
+}
+
+#title{
+    position: absolute;
+    left: 20px;
+    bottom: 5px;
+    font-family: 'Poiret One', cursive;
+    font-size: 5em;
+    text-shadow: 3px 3px 3px #000;
+    color: white;
+}
+
+#photo-attribution{
+	bottom: 2px;
+	position: absolute;
+	right: 2px;
+}
+#photo-attribution a{
+	color: #fff;
+	background-color: #000;
+	font-size: 12px;
+	font-family: 'Muli', sans-serif;
+	opacity: 0.75;
+	padding: 1px;
+}
+
+#mapview{
+	height: 600px;
+}
+
+table tbody tr td{
+    font-size: 18px;
+}
+
+#dochi {
+	font-size: 2em;
+}
