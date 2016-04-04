@@ -29,8 +29,8 @@ app.get('/db', function (request, response) {
 
 app.get('/api/v1/restaurant', function(req, res) {
 
-//	var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/';
-	var connectionString = 'postgres://localhost:5432/';
+	var connectionString = process.env.DATABASE_URL;
+//	var connectionString = 'postgres://localhost:5432/';
     var results = [];
 
     // Get a Postgres client from the connection pool
