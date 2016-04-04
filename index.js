@@ -4,7 +4,8 @@ var pg = require('pg');
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
@@ -25,6 +26,38 @@ app.get('/db', function (request, response) {
     });
   });
 })
+
+app.get('/api/v1/restaurant', function(req, res) {
+
+	var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/';
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+        var query = client.query("SELECT * FROM inno_restaurant");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+
+});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
