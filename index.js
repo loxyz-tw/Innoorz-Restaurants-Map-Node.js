@@ -28,8 +28,8 @@ app.get('/db', function (request, response) {
 })
 
 app.get('/api/v1/restaurant', function(req, res) {
-	var connectionString = "postgres://tywxahcpcxckao:GuMKdf5J4ARB9ZAgFWCQad1Dd5@ec2-54-243-243-89.compute-1.amazonaws.com:5432/d6gk7amrj3n7vu?ssl=true";
-//	var connectionString = process.env.DATABASE_URL;
+//	var connectionString = "postgres://tywxahcpcxckao:GuMKdf5J4ARB9ZAgFWCQad1Dd5@ec2-54-243-243-89.compute-1.amazonaws.com:5432/d6gk7amrj3n7vu?ssl=true";
+	var connectionString = process.env.DATABASE_URL;
 //	var connectionString = 'postgres://localhost:5432/';
     var results = [];
 
