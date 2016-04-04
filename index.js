@@ -12,12 +12,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-//  response.render('pages/index');
-	var result = ''
-	var times = process.env.TIMES || 5
-	for (i=0; i < times; i++)
-		result += cool();
-	response.send(result);
+  response.render('index.html');
 });
 
 app.get('/cool', function(request, response) {
