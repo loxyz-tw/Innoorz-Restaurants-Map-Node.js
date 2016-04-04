@@ -20,7 +20,7 @@ function initMap() {
         map: map,
         position: map.center,
         animation : google.maps.Animation.DROP,
-        icon : "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        icon : "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
     })
     
     ResInfo = new google.maps.InfoWindow({content: "Innorz" });
