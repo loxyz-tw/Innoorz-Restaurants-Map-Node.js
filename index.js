@@ -1,4 +1,3 @@
-var cool = require('cool-ascii-faces');
 var express = require('express');
 var app = express();
 var pg = require('pg');
@@ -13,10 +12,6 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
   response.render('index.html');
-});
-
-app.get('/cool', function(request, response) {
-  response.send(cool());
 });
 
 app.get('/db', function (request, response) {
