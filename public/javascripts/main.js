@@ -67,7 +67,7 @@ $("form").submit(function(event) {
 
 //List Restaurant
 function restaurantList(){
-    $.getJSON("/api/v1/restaurant",function(data){
+    $.getJSON("/api/v1/restaurant").then,function(data){
         var tableRow = "";
 		
         for(i=0;i<data.length;i++){
