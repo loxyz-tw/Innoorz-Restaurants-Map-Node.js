@@ -5,52 +5,54 @@
 </head>
 
 <body>
-
-  <% include ../partials/nav.ejs %>
-
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="/lang-logo.png">
-    </a>
-    <h1>Getting Started with Node on Heroku</h1>
-    <p>This is a sample Node application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-nodejs"><span class="glyphicon glyphicon-flash"></span> Getting Started with Node</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/node-js-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
+  <div id="header">
+        <div id="title"><span>Innorz's Restaurants Map</span></div>
+        <div id="photo-attribution">
+            <a href="https://www.flickr.com/photos/68711844@N07/15638897400/in/album-72157649298612516/" target="_blank">Photo by Michael Stern, CC-BY-SA</a>
+	  </div>
   </div>
-</div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs" class="alert-link">Getting Started with Node on Heroku</a> tutorial.
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-      <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/node-js-getting-started">Heroku Button</a> on the repository.</li>
-
-        <li>When Heroku received the source code, it grabbed all the dependencies in the <a href="https://github.com/heroku/node-js-getting-started/blob/master/package.json">package.json</a>.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
-        <li>Check out the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started</a> guide to learn more!</li>
-      </ul>
+    <div id="mapview"></div>
+    <div class="container">
+        <div class="page-header"><h1>新增餐廳 <small>Add Restaurant</small></h1></div>
+        <form id="restaurantform" class="form row" role="form">
+           <div class="restaurant-data col-md-10">
+                <div class="form-group col-md-3">
+                    <label class="sr-only">餐廳名稱</label>
+                    <input class="form-control input-lg" type="text" name="name" placeholder="餐廳名稱">
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="sr-only">餐廳地址</label>
+                    <input class="form-control input-lg" type="text" name="address" placeholder="餐廳地址">
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="sr-only">平均價格</label>
+                    <input class="form-control input-lg" type="text" name="price" placeholder="平均價格">
+               </div>
+            </div>
+            <div id="buttons" class="col-md-2">
+                <button id="plus" class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button id="submit" class="btn btn-primary btn-lg" type="submit">送出</button>
+            </div>
+        </form>
     </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started with Node on Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-nodejs">Deploying Node Apps on Heroku</a></li>
-      </ul>
+    <div class="container">
+        <div class="page-header"><h1>餐廳列表 <small>Restaurants List</small></h1></div>
+        <div class="row">
+           <div class="col-md-12">
+            <table id="restaurant-list" class="table table-hover">
+                <thead><tr><th>餐廳名稱</th><th>餐廳地址</th><th>平均價格</th></tr></thead>
+                <tbody></tbody>
+            </table>
+            </div>
+        </div>
     </div>
-  </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-  </div>
-</div>
-
-
+    <div class="container">
+        <div style="padding-bottom:10px;">
+            <div class="page-header"><h1>今天吃什麼？ <small>Today's launch is?</small></h1></div>
+            <div id="dochi"></div>
+            <button id="goButton" class="btn btn-primary btn-lg">開始選擇</button>
+        </div>
+    </div>
 </body>
+    <% include ../partials/footer.ejs %>
 </html>
