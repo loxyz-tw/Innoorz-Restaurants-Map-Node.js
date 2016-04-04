@@ -1,6 +1,13 @@
-//Init List restaurants
-var restaurantData = [];
+Ôªø//Init List restaurants
+var restaurantName = [];
+var restaurantPrice = [];
+var restaurantLat = [];
+var restaurantLng = [];
+var distance;
+var duration;
 var timer;
+var directionsDisplay;
+var directionsService;
 
 //Google Map property
 var geocoder;
@@ -10,12 +17,14 @@ var info;
 
 //Init Googel Map
 function initMap() {
+	directionsService = new google.maps.DirectionsService();
     geocoder = new google.maps.Geocoder();
     map = new google.maps.Map(document.getElementById('mapview'), {
-        center: {lat: 25.041, lng: 121.538},
+        center: {lat: 25.041004, lng: 121.537734},
         scrollwheel: false,
         zoom: 17
     });
+	directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
     var inno = new google.maps.Marker({
         map: map,
         position: map.center,
@@ -60,11 +69,17 @@ $("form").submit(function(event) {
 function restaurantList(){
     $.getJSON("/api/v1/restaurant",function(data){
         var tableRow = "";
+		
         for(i=0;i<data.length;i++){
+			
             var restaurant = "";
             restaurant += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td>");
             tableRow += ("<tr>"+restaurant+"</tr>");
-            restaurantData.push(data[i].name);
+            restaurantName.push(data[i].name);
+			restaurantPrice.push(data[i].price);
+			restaurantLat.push(data[i].lat);
+			restaurantLng.push(data[i].lng);
+			
             var latlng = {lat: data[i].lat,lng: data[i].lng};
             var name = data[i].name;
             var address = data[i].address;
@@ -76,13 +91,14 @@ function restaurantList(){
                 position: latlng
             });
             var content = "<h3>"+name+"</h3>"+
-                "<p>¶aß}°G"+address+"</p>"+
-                "<p>•≠ß°ª˘ÆÊ°G"+price+"</p>";
+                "<p>Âú∞ÂùÄÔºö"+address+"</p>"+
+                "<p>Âπ≥ÂùáÂÉπÊ†ºÔºö"+price+"</p>";
             
             mapInfo(marker,map,content);
         }
         $("#restaurant-list tbody").html(tableRow);
     })
+	
 }
 
 function mapInfo(marker,map,content){
@@ -101,30 +117,67 @@ function codeAddress(name,address,price){
             var location = results[0].geometry.location.split(",");
             var restaurantArray = [{"name":name, "address":address, lat: location[0],lng: location[1], "price":price}];
             var json = JSON.stringify(restaurantArray)
-            $.post("../handle.php",{"json" : json},function(data){
-                restaurantList();
-            });
             
         }
     })
 }
 
-
+var result;
+var select;
 //ranfom for restaurant
 $("#goButton").on("click",function(){
     $("#dochi").html("");
-    dochiAnimation(0);
+	dochiAnimation(0);
+	select = Math.ceil(Math.random()*(restaurantName.length - 1));
 })
-var txtArray = ["§µ","§—","ß⁄","≠n","¶Y°G"];
+var txtArray = ["‰ªä","Â§©","Êàë","Ë¶Å","ÂêÉÔºö"];
 function dochiAnimation(num){
-    if(num < 5){
+	if(num == 3) {
+		getDistanceAndDuration(select);
+		result = (restaurantName[select]) + " ÔºõÂπ≥ÂùáÂÉπÊ†º" + restaurantPrice[select];
+		$("#dochi").append(txtArray[num]);
+		num++;
+        timer = setTimeout(function(){dochiAnimation(num)},500);
+	}else if(num < 5){
         $("#dochi").append(txtArray[num]);
         num++;
         timer = setTimeout(function(){dochiAnimation(num)},500);
     }else{
-        var select = Math.ceil(Math.random()*(restaurantData.length));
-        $("#dochi").append(restaurantData[select]);
+        $("#dochi").append(result).append(" ÔºõË∑ùÈõ¢" + distance).append(" ÔºõÊ≠•Ë°åÊôÇÈñì" + duration);
         clearTimeout(timer);
     }
     
+}
+
+function getDistanceAndDuration(index) {
+	directionsDisplay.setMap(map);
+	var source = "25.041004,121.537734"
+	var destination = restaurantLat[index]+","+restaurantLng[index]
+	
+	var request = {
+		origin: source,
+		destination: destination,
+		travelMode: google.maps.TravelMode.WALKING
+	};
+	
+	directionsService.route(request, function (response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        }
+    });
+	
+    var service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix({
+        origins: [source],
+        destinations: [destination],
+        travelMode: google.maps.TravelMode.WALKING,
+        unitSystem: google.maps.UnitSystem.METRIC,
+    }, function (response, status) {
+        if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+            distance = response.rows[0].elements[0].distance.text;
+            duration = response.rows[0].elements[0].duration.text;
+        } else {
+            alert("Unable to find the distance via road.");
+        }
+    });
 }
