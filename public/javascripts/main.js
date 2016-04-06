@@ -95,7 +95,7 @@ function restaurantList(){
             var content = "<h3>"+name+"</h3>"+
                 "<p>地址："+address+"</p>"+
                 "<p>平均價格："+price+"</p>"+
-                "<p>平均評分："+star+"</p>";
+                "<p>平均評分："+(star/10).toFixed(1)+"</p>";
             
             mapInfo(marker,map,content);
         }
