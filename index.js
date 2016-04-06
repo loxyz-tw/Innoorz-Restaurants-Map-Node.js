@@ -43,7 +43,7 @@ app.get('/api/v1/restaurant', function(req, res) {
         }
 
         // SQL Query > Select Data
-        var query = client.query("SELECT * FROM inno_restaurant");
+        var query = client.query("SELECT * FROM inno_restaurant ORDER BY star DESC");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
