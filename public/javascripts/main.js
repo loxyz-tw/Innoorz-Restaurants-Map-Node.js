@@ -1,4 +1,4 @@
-﻿//Init List restaurants
+//Init List restaurants
 var restaurantName = [];
 var restaurantPrice = [];
 var restaurantLat = [];
@@ -74,7 +74,7 @@ function restaurantList(){
         for(i=0;i<data.length;i++){
 			
             var restaurant = "";
-            restaurant += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td>");
+            restaurant += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td><td>"+(data[i].star/10).toFixed(1)+"</td>");
             tableRow += ("<tr>"+restaurant+"</tr>");
             restaurantName.push(data[i].name);
 			restaurantPrice.push(data[i].price);
@@ -85,6 +85,7 @@ function restaurantList(){
             var name = data[i].name;
             var address = data[i].address;
             var price = data[i].price;
+            var star = data[i].star;
 
             var marker = new google.maps.Marker({
                 map: map,
@@ -93,7 +94,8 @@ function restaurantList(){
             });
             var content = "<h3>"+name+"</h3>"+
                 "<p>地址："+address+"</p>"+
-                "<p>平均價格："+price+"</p>";
+                "<p>平均價格："+price+"</p>"+
+                "<p>平均評分："+star+"</p>";
             
             mapInfo(marker,map,content);
         }
