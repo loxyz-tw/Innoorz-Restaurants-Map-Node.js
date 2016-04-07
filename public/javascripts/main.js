@@ -137,7 +137,7 @@ $("#goButton").on("click",function(){
 	dochiAnimation(0);
     //get random select index by weighted array
 	selectWeightedIndex = Math.floor(Math.random()*(restaurantWeight.length));
-    selectIndex = restaurantWeight[selectWeightedIndexht];
+    selectIndex = restaurantWeight[selectWeightedIndex];
 })
 var txtArray = ["今","天","我","要","吃："];
 function dochiAnimation(num){
