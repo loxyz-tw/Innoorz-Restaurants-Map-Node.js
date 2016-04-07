@@ -82,7 +82,7 @@ function restaurantList(){
 			restaurantLat.push(data[i].lat);
 			restaurantLng.push(data[i].lng);
             //Create a weighted array
-            for(var j=0; j<Math.pow(2, data[i].star); j++)
+            for(var j=0; j<Math.pow(2, (data[i].star)/10); j++)
                 restaurantWeight.push(i);
 			
             var latlng = {lat: data[i].lat,lng: data[i].lng};
@@ -136,8 +136,8 @@ $("#goButton").on("click",function(){
     $("#dochi").html("");
 	dochiAnimation(0);
     //get random select index by weighted array
-//	selectWeightedIndex = Math.floar(Math.random()*(restaurantWeight.length));
-//    selectIndex = restaurantWeight[selectWeightedIndexht];
+	selectWeightedIndex = Math.floar(Math.random()*(restaurantWeight.length));
+    selectIndex = restaurantWeight[selectWeightedIndexht];
 })
 var txtArray = ["今","天","我","要","吃："];
 function dochiAnimation(num){
