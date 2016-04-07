@@ -130,14 +130,14 @@ function codeAddress(name,address,price){
 }
 
 var result;
-var selectWeightedIndex, selectIndex;
+var selectWeightedIndex, selectIndex = 1;
 //random for restaurant
 $("#goButton").on("click",function(){
     $("#dochi").html("");
 	dochiAnimation(0);
     //get random select index by weighted array
-	selectWeightedIndex = Math.floar(Math.random()*(restaurantWeight.length));
-    selectIndex = restaurantWeight[selectWeightedIndexht];
+//	selectWeightedIndex = Math.floar(Math.random()*(restaurantWeight.length));
+//    selectIndex = restaurantWeight[selectWeightedIndexht];
 })
 var txtArray = ["今","天","我","要","吃："];
 function dochiAnimation(num){
