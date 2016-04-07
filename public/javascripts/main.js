@@ -3,17 +3,18 @@ var restaurantName = [];
 var restaurantPrice = [];
 var restaurantLat = [];
 var restaurantLng = [];
+var restaurantWeight = [];
 var distance;
 var duration;
 var timer;
-var directionsDisplay;
-var directionsService;
 
 //Google Map property
 var geocoder;
 var map;
 var ResInfo = null;
 var info;
+var directionsDisplay;
+var directionsService;
 
 //Init Googel Map
 function initMap() {
@@ -54,7 +55,7 @@ $("#plus").on("click",function(){
 $("form").submit(function(event) {
     var length = $(".restaurant-data").length
     var restaurantArray = []
-    for(i=0;i<length;i++){
+    for(var i=0;i<length;i++){
         var name = $("input[name='name']").eq(i).val()
         var address = $("input[name='address']").eq(i).val()
         var price = $("input[name='price']").eq(i).val()
@@ -71,7 +72,7 @@ function restaurantList(){
 //	$.getJSON("../restaurants.json").then(function(data){
         var tableRow = "";
 		
-        for(i=0;i<data.length;i++){
+        for(var i=0;i<data.length;i++){
 			
             var restaurant = "";
             restaurant += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td><td>"+(data[i].star/10).toFixed(1)+"</td>");
@@ -80,6 +81,9 @@ function restaurantList(){
 			restaurantPrice.push(data[i].price);
 			restaurantLat.push(data[i].lat);
 			restaurantLng.push(data[i].lng);
+            //Create a weighted array
+            for(var j=0; j<Math.pow(2, data[i].star); j++)
+                restaurantWeight.push(i);
 			
             var latlng = {lat: data[i].lat,lng: data[i].lng};
             var name = data[i].name;
@@ -126,18 +130,20 @@ function codeAddress(name,address,price){
 }
 
 var result;
-var select;
-//ranfom for restaurant
+var selectWeightedIndex, selectIndex;
+//random for restaurant
 $("#goButton").on("click",function(){
     $("#dochi").html("");
 	dochiAnimation(0);
-	select = Math.ceil(Math.random()*(restaurantName.length - 1));
+    //get random select index by weighted array
+	selectWeightedIndex = Math.floar(Math.random()*(restaurantWeight.length));
+    selectIndex = restaurantWeight[selectWeightedIndexht];
 })
 var txtArray = ["今","天","我","要","吃："];
 function dochiAnimation(num){
 	if(num == 3) {
-		getDistanceAndDuration(select);
-		result = (restaurantName[select]) + " ；平均價格" + restaurantPrice[select];
+		getDistanceAndDuration(selectIndex);
+		result = (restaurantName[selectIndex]) + " ；平均價格" + restaurantPrice[selectIndex];
 		$("#dochi").append(txtArray[num]);
 		num++;
         timer = setTimeout(function(){dochiAnimation(num)},500);
