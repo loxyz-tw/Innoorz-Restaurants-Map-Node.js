@@ -130,7 +130,7 @@ function codeAddress(name,address,price){
 }
 
 var result;
-var selectWeightedIndex, selectIndex = 1;
+var selectWeightedIndex, selectIndex;
 //random for restaurant
 $("#goButton").on("click",function(){
     $("#dochi").html("");
