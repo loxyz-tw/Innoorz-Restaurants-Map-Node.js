@@ -31,31 +31,39 @@ function initMap() {
         position: map.center,
         animation : google.maps.Animation.DROP,
         icon : "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-    })
+    });
     
     ResInfo = new google.maps.InfoWindow({content: "Innorz" });
     ResInfo.open(map, inno);
     
-    inno.addListener('click', function() {
-         if(ResInfo)ResInfo.close();                
-         ResInfo = new google.maps.InfoWindow({content: "Innorz"});
-         ResInfo.open(map, inno);
-     }); 
+    inno.addListener('click', function () {
+        if (ResInfo) {
+            ResInfo.close();
+        }
+        ResInfo = new google.maps.InfoWindow({content: "Innorz"});
+        ResInfo.open(map, inno);
+    });
     restaurantList();
 }
 
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    userEmail = profile.getEmail();
+}
 
 //Add a new row for insert restaurant data
-$("#plus").on("click",function(){
+/*
+$("#plus").on("click",function () {    
     var clone = $(".restaurant-data:last").clone().find("input:text").val("").end();
     $("#buttons").before(clone);
-})
+});
 
 //Post data
 $("form").submit(function(event) {
-    var length = $(".restaurant-data").length
+    
+    var length = $(".restaurant-data").length;
     var restaurantArray = []
-    for(var i=0;i<length;i++){
+    for(var i = 0; i < length; i++){
         var name = $("input[name='name']").eq(i).val()
         var address = $("input[name='address']").eq(i).val()
         var price = $("input[name='price']").eq(i).val()
@@ -64,8 +72,9 @@ $("form").submit(function(event) {
     $("form")[0].reset();
     $(".restaurant-data").not(":first").remove();
     event.preventDefault();
+    
 });
-
+*/
 //List Restaurant
 function restaurantList(){
     $.getJSON("/api/v1/restaurant").then(function(data){

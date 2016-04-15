@@ -20,6 +20,17 @@
         </div>
     </div>
     <div class="container">
+        <div class="page-header"><h1>餐廳列表 <small>Restaurants List</small></h1></div>
+        <div class="row">
+           <div class="col-md-12">
+            <table id="restaurant-list" class="table table-hover">
+                <thead><tr><th>餐廳名稱</th><th>餐廳地址</th><th>平均價格</th><th>平均評分</th></tr></thead>
+                <tbody></tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div class="page-header"><h1>新增餐廳 <small>Add Restaurant</small></h1></div>
         <form id="restaurantform" class="form row" role="form">
            <div class="restaurant-data col-md-10">
@@ -42,17 +53,7 @@
             </div>
         </form>
     </div>
-    <div class="container">
-        <div class="page-header"><h1>餐廳列表 <small>Restaurants List</small></h1></div>
-        <div class="row">
-           <div class="col-md-12">
-            <table id="restaurant-list" class="table table-hover">
-                <thead><tr><th>餐廳名稱</th><th>餐廳地址</th><th>平均價格</th><th>平均評分</th></tr></thead>
-                <tbody></tbody>
-            </table>
-            </div>
-        </div>
-    </div>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
 </body>
     <% include ../partials/footer.ejs %>
 </html>
