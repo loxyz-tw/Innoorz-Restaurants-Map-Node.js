@@ -49,7 +49,7 @@ function initMap() {
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     userEmail = profile.getEmail();
-	if(userEmail.split("@")[1] == "innoorz.com) {
+	if(userEmail.split("@")[1] == "innoorz.com") {
 		//Add a new row for insert restaurant data
 		$("#plus").show();
 		$("#plus").on("click",function () {    
