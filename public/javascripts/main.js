@@ -16,9 +16,6 @@ var info;
 var directionsDisplay;
 var directionsService;
 
-$("plus").hide();
-$("submit").hide();
-
 //Init Googel Map
 function initMap() {
 	directionsService = new google.maps.DirectionsService();
@@ -212,3 +209,8 @@ function getDistanceAndDuration(index) {
         }
     });
 }
+
+$(document).ready(function(){
+	$("#plus").hide();
+	$("#submit").hide();
+});
