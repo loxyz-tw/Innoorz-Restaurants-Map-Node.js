@@ -49,32 +49,35 @@ function initMap() {
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     userEmail = profile.getEmail();
+	if(userEmail.split("@")[1] == "innoorz.com) {
+		//Add a new row for insert restaurant data
+		$("#plus").show();
+		$("#plus").on("click",function () {    
+			var clone = $(".restaurant-data:last").clone().find("input:text").val("").end();
+			$("#buttons").before(clone);
+		});
+		//Post data
+		$("#submit").show();
+		$("form").submit(function(event) {
+			
+			var length = $(".restaurant-data").length;
+			var restaurantArray = []
+			for(var i = 0; i < length; i++){
+				var name = $("input[name='name']").eq(i).val()
+				var address = $("input[name='address']").eq(i).val()
+				var price = $("input[name='price']").eq(i).val()
+				codeAddress(name,addressmprice);    
+			}
+			$("form")[0].reset();
+			$(".restaurant-data").not(":first").remove();
+			event.preventDefault();
+			
+		});
+
+	}
 }
 
-//Add a new row for insert restaurant data
-/*
-$("#plus").on("click",function () {    
-    var clone = $(".restaurant-data:last").clone().find("input:text").val("").end();
-    $("#buttons").before(clone);
-});
 
-//Post data
-$("form").submit(function(event) {
-    
-    var length = $(".restaurant-data").length;
-    var restaurantArray = []
-    for(var i = 0; i < length; i++){
-        var name = $("input[name='name']").eq(i).val()
-        var address = $("input[name='address']").eq(i).val()
-        var price = $("input[name='price']").eq(i).val()
-        codeAddress(name,addressmprice);    
-    }
-    $("form")[0].reset();
-    $(".restaurant-data").not(":first").remove();
-    event.preventDefault();
-    
-});
-*/
 //List Restaurant
 function restaurantList(){
     $.getJSON("/api/v1/restaurant").then(function(data){
