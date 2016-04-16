@@ -209,3 +209,8 @@ function getDistanceAndDuration(index) {
         }
     });
 }
+
+$(document).ready(function(){
+	$("plus").hide();
+	$("submit").hide();
+});
