@@ -64,15 +64,14 @@ app.get('/api/v1/restaurant', function(req, res) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/add", function(req, res){
 	var name = req.body.name;
-//	var address = req.body.address;
-//	var lat = req.body.lat;
-//	var lng = req.body.lng;
-//	var price = req.body.price;
-//	var star = req.body.star * 10;
+	var address = req.body.address;
+	var lat = req.body.lat;
+	var lng = req.body.lng;
+	var price = req.body.price;
+	var star = req.body.star * 10;
 
-//	var post = {name: name, address: address, lat: lat, lng: lng, price: price, star: star};
-	console.log(req.body);
-/*
+	var post = {name: name, address: address, lat: lat, lng: lng, price: price, star: star};
+
 	var connectionString = process.env.DATABASE_URL;
 	pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -92,18 +91,7 @@ app.post("/add", function(req, res){
 					res.redirect("/")
 				}
 		});
-		
-		var query = client.query("INSERT INTO inno_restaurant(name, address, lat, lng, price, star) " + 
-			"VALUES ($1, $2, $3, $4, $5, $6)", [name, address, lat, lng, price, star], function(err, result){
-				if(err) {
-					console.log(err);
-				} else {
-					done;
-					res.redirect("/")
-				}
-		});
     });
-*/	
 });
 
 app.listen(app.get('port'), function() {
