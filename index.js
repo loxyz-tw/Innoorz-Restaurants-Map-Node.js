@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var pg = require('pg');
 
@@ -61,16 +62,16 @@ app.get('/api/v1/restaurant', function(req, res) {
 });
 
 app.post("/add", function(req, res){
-	var name = req.query.name;
-	var address = req.query.address;
-	var lat = req.query.lat;
-	var lng = req.query.lng;
-	var price = req.query.price;
-//	var star = req.query.star * 10;
-	var star = 40;
+	var name = req.body.name;
+	var address = req.body.address;
+	var lat = req.body.lat;
+	var lng = req.body.lng;
+	var price = req.body.price;
+	var star = req.body.star * 10;
+
 //	var post = {name: name, address: address, lat: lat, lng: lng, price: price, star: star};
 	console.log(name + address + lat + lng + price + star);
-
+/*
 	var connectionString = process.env.DATABASE_URL;
 	pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -80,7 +81,7 @@ app.post("/add", function(req, res){
           return res.status(500).json({ success: false, data: err});
         }
         // SQL Query > Select Data
-		/*
+		
         var query = client.query("INSERT INTO inno_restaurant(name, address, lat, lng, price, star) " + 
 			"VALUES (:name, :address, :lat, :lng, :price, :star)", post, function(err, result){
 				if(err) {
@@ -90,7 +91,7 @@ app.post("/add", function(req, res){
 					res.redirect("/")
 				}
 		});
-		*/
+		
 		var query = client.query("INSERT INTO inno_restaurant(name, address, lat, lng, price, star) " + 
 			"VALUES ($1, $2, $3, $4, $5, $6)", [name, address, lat, lng, price, star], function(err, result){
 				if(err) {
@@ -101,7 +102,7 @@ app.post("/add", function(req, res){
 				}
 		});
     });
-	
+*/	
 });
 
 app.listen(app.get('port'), function() {
