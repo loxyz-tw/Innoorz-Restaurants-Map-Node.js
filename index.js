@@ -72,6 +72,7 @@ app.post("/add", function(req, res){
 
 	var post = {name: name, address: address, lat: lat, lng: lng, price: price, star: star};
 
+
 	var connectionString = process.env.DATABASE_URL;
 	pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -80,10 +81,9 @@ app.post("/add", function(req, res){
           console.log(err);
           return res.status(500).json({ success: false, data: err});
         }
-        // SQL Query > Select Data
-		
-        var query = client.query("INSERT INTO inno_restaurant(name, address, lat, lng, price, star) " + 
-			"VALUES (:name, :address, :lat, :lng, :price, :star)", post, function(err, result){
+        // SQL Query > Insert Data
+		var query = client.query("INSERT INTO inno_restaurant(name, address, lat, lng, price, star) " + 
+			"VALUES ($1, $2, $3, $4, $5, $6)", [name, address, lat, lng, price, star], function(err, result){
 				if(err) {
 					console.log(err);
 				} else {
@@ -92,6 +92,7 @@ app.post("/add", function(req, res){
 				}
 		});
     });
+	
 });
 
 app.listen(app.get('port'), function() {
