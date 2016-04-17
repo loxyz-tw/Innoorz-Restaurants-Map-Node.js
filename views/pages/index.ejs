@@ -32,28 +32,42 @@
     </div>
     <div class="container">
         <div class="page-header"><h1>新增餐廳 <small>Add Restaurant</small></h1></div>
-        <form id="restaurantform" class="form row" role="form">
+        <form id="restaurantform" class="form row" role="form" action="/add">
            <div class="restaurant-data col-md-10">
                 <div class="form-group col-md-3">
                     <label class="sr-only">餐廳名稱</label>
                     <input class="form-control input-lg" type="text" name="name" placeholder="餐廳名稱">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-5">
                     <label class="sr-only">餐廳地址</label>
                     <input class="form-control input-lg" type="text" name="address" placeholder="餐廳地址">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-1">
                     <label class="sr-only">平均價格</label>
                     <input class="form-control input-lg" type="text" name="price" placeholder="平均價格">
-               </div>
+				</div>
+				<div class="form-group col-md-1">
+                    <label class="sr-only">平均評分</label>
+                    <input class="form-control input-lg" type="text" name="star" placeholder="平均評分">
+				</div>
             </div>
             <div id="buttons" class="col-md-2">
                 <button id="plus" class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                 <button id="submit" class="btn btn-primary btn-lg" type="submit">送出</button>
             </div>
+			<div class="container">
+				<div class="form-group col-md-3">
+				</div>
+				<div class="form-group col-md-2">
+					<input class="form-control input-lg" type="text" name="lat" placeholder="緯度">
+				</div>
+				<div class="form-group col-md-2">
+					<input class="form-control input-lg" type="text" name="lng" placeholder="經度">
+				</div>
+			</div>
         </form>
 		<div class="g-signin2" data-onsuccess="onSignIn"></div>
-		<div><a href="#" onclick="signOut();">Sign out</a></div>
+		<div><a href="" onclick="signOut();">Sign out</a></div>
     </div>
 </body>
     <% include ../partials/footer.ejs %>

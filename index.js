@@ -60,6 +60,37 @@ app.get('/api/v1/restaurant', function(req, res) {
 
 });
 
+app.post("/add", function(req, res){
+	var name = req.query.name;
+	var address = req.query.address;
+	var lat = req.query.lat;
+	var lng = req.query.lng;
+	var price = req.query.price;
+	var star = req.query.star * 10;
+	var post = [name, address, lat, lng, price, star]
+
+	var connectionString = process.env.DATABASE_URL;
+	pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+        // SQL Query > Select Data
+        var query = client.query("INSERT INTO inno_restaurant(name, address, lat, lng, price, star) " + 
+			"VALUES (:name, :address, :lat, :lng, :price, :star)", post, function(err, result){
+				if(err) {
+					console.log(err);
+				} else {
+					done;
+				}
+			});
+		
+    });
+	
+});
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });

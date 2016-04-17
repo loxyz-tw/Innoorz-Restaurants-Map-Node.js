@@ -211,7 +211,7 @@ function showButtons() {
 				var name = $("input[name='name']").eq(i).val()
 				var address = $("input[name='address']").eq(i).val()
 				var price = $("input[name='price']").eq(i).val()
-				codeAddress(name,addressmprice);    
+				codeAddress(name,addressmprice);
 			}
 			$("form")[0].reset();
 			$(".restaurant-data").not(":first").remove();
