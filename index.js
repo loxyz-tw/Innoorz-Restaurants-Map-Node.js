@@ -63,14 +63,14 @@ app.get('/api/v1/restaurant', function(req, res) {
 
 app.post("/add", function(req, res){
 	var name = req.body.name;
-	var address = req.body.address;
-	var lat = req.body.lat;
-	var lng = req.body.lng;
-	var price = req.body.price;
-	var star = req.body.star * 10;
+//	var address = req.body.address;
+//	var lat = req.body.lat;
+//	var lng = req.body.lng;
+//	var price = req.body.price;
+//	var star = req.body.star * 10;
 
 //	var post = {name: name, address: address, lat: lat, lng: lng, price: price, star: star};
-	console.log(name + address + lat + lng + price + star);
+	console.log(req.body.name);
 /*
 	var connectionString = process.env.DATABASE_URL;
 	pg.connect(connectionString, function(err, client, done) {

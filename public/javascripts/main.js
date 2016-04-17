@@ -223,6 +223,9 @@ function showButtons() {
 	}
 }
 
+// google address to geocode api example
+// https://maps.googleapis.com/maps/api/geocode/json?address=台北市中正區八德路一段82巷9弄12號&key=AIzaSyApkeDFo4vWsNXO0QmPcrFG_A47UuBxd3g
+
 $(document).ready(function(){
 	$("#plus").hide();
 	$("#submit").hide();
