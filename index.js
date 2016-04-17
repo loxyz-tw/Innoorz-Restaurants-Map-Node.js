@@ -70,7 +70,7 @@ app.post("/add", function(req, res){
 //	var star = req.body.star * 10;
 
 //	var post = {name: name, address: address, lat: lat, lng: lng, price: price, star: star};
-	console.log(req.body.name);
+	console.log(req.body);
 /*
 	var connectionString = process.env.DATABASE_URL;
 	pg.connect(connectionString, function(err, client, done) {
