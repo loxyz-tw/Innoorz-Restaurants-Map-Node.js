@@ -50,6 +50,8 @@ function initMap() {
 }
 
 function onSignIn(googleUser) {
+	$("#gSignin").hide();
+	$("#gSignout").show();
     var profile = googleUser.getBasicProfile();
     userEmail = profile.getEmail();
 	if(userEmail.split("@")[1] == "inno-orz.com") {
@@ -196,11 +198,13 @@ function getDistanceAndDuration(index) {
 function showButtons() {
 	if(isSignInAsInno) {
 	//Add a new row for insert restaurant data
-		$("#plus").show();
+//		$("#plus").show();
+		/*
 		$("#plus").on("click",function () {    
 			var clone = $(".restaurant-data:last").clone().find("input:text").val("").end();
 			$("#buttons").before(clone);
 		});
+		*/
 		//Post data
 		$("#submit").show();
 		/*
@@ -220,6 +224,8 @@ function showButtons() {
 			
 		});
 		*/
+	} else {
+		
 	}
 }
 
@@ -227,7 +233,8 @@ function showButtons() {
 // https://maps.googleapis.com/maps/api/geocode/json?address=台北市中正區八德路一段82巷9弄12號&key=AIzaSyApkeDFo4vWsNXO0QmPcrFG_A47UuBxd3g
 
 $(document).ready(function(){
-	$("#plus").hide();
+//	$("#plus").hide();
 	$("#submit").hide();
+	$("#gSignout").hide();
 	showButtons();
 });
