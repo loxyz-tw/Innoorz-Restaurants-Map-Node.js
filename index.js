@@ -61,6 +61,7 @@ app.get('/api/v1/restaurant', function(req, res) {
 
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/add", function(req, res){
 	var name = req.body.name;
 //	var address = req.body.address;
