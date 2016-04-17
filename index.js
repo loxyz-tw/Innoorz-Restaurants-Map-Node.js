@@ -67,7 +67,7 @@ app.post("/add", function(req, res){
 	var lng = req.query.lng;
 	var price = req.query.price;
 	var star = req.query.star * 10;
-var post = {name: name, address: address, lat: lat, lng: lng, price: price, star: star};
+	var post = {name: name, address: address, lat: lat, lng: lng, price: price, star: star};
 
 	var connectionString = process.env.DATABASE_URL;
 	pg.connect(connectionString, function(err, client, done) {
@@ -78,6 +78,7 @@ var post = {name: name, address: address, lat: lat, lng: lng, price: price, star
           return res.status(500).json({ success: false, data: err});
         }
         // SQL Query > Select Data
+		/*
         var query = client.query("INSERT INTO inno_restaurant(name, address, lat, lng, price, star) " + 
 			"VALUES (:name, :address, :lat, :lng, :price, :star)", post, function(err, result){
 				if(err) {
@@ -86,8 +87,17 @@ var post = {name: name, address: address, lat: lat, lng: lng, price: price, star
 					done;
 					res.redirect("/")
 				}
-			});
-		
+		});
+		*/
+		var query = client.query("INSERT INTO inno_restaurant(name, address, lat, lng, price, star) " + 
+			"VALUES ($1, $2, $3, $4, $5, $6)", [name, address, lat, lng, price, star], function(err, result){
+				if(err) {
+					console.log(err);
+				} else {
+					done;
+					res.redirect("/")
+				}
+		});
     });
 	
 });
