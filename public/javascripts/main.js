@@ -17,7 +17,7 @@ var directionsDisplay;
 var directionsService;
 
 //Sign in checking
-boolean isSignInAsInno = false;
+var isSignInAsInno = false;
 
 //Init Googel Map
 function initMap() {
