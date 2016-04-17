@@ -84,6 +84,7 @@ app.post("/add", function(req, res){
 					console.log(err);
 				} else {
 					done;
+					res.redirect("/")
 				}
 			});
 		
