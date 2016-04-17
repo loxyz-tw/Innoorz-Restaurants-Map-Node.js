@@ -16,6 +16,9 @@ var info;
 var directionsDisplay;
 var directionsService;
 
+//Sign in checking
+boolean isSignInAsInno = false;
+
 //Init Googel Map
 function initMap() {
 	directionsService = new google.maps.DirectionsService();
@@ -50,30 +53,8 @@ function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     userEmail = profile.getEmail();
 	if(userEmail.split("@")[1] == "inno-orz.com") {
-		//Add a new row for insert restaurant data
-		$("#plus").show();
-		$("#plus").on("click",function () {    
-			var clone = $(".restaurant-data:last").clone().find("input:text").val("").end();
-			$("#buttons").before(clone);
-		});
-		//Post data
-		$("#submit").show();
-		$("form").submit(function(event) {
-			
-			var length = $(".restaurant-data").length;
-			var restaurantArray = []
-			for(var i = 0; i < length; i++){
-				var name = $("input[name='name']").eq(i).val()
-				var address = $("input[name='address']").eq(i).val()
-				var price = $("input[name='price']").eq(i).val()
-				codeAddress(name,addressmprice);    
-			}
-			$("form")[0].reset();
-			$(".restaurant-data").not(":first").remove();
-			event.preventDefault();
-			
-		});
-
+		isSignInAsInno = true;
+		showButtons();
 	}
 }
 
@@ -81,6 +62,8 @@ function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function () {
 	  console.log('User signed out.');
+	  isSignInAsInno = false;
+	  window.location.replace("https://inno-restaurant.herokuapp.com");
 	});
 }
 
@@ -210,7 +193,36 @@ function getDistanceAndDuration(index) {
     });
 }
 
+function showButtons() {
+	if(isSignInAsInno) {
+	//Add a new row for insert restaurant data
+		$("#plus").show();
+		$("#plus").on("click",function () {    
+			var clone = $(".restaurant-data:last").clone().find("input:text").val("").end();
+			$("#buttons").before(clone);
+		});
+		//Post data
+		$("#submit").show();
+		$("form").submit(function(event) {
+			
+			var length = $(".restaurant-data").length;
+			var restaurantArray = []
+			for(var i = 0; i < length; i++){
+				var name = $("input[name='name']").eq(i).val()
+				var address = $("input[name='address']").eq(i).val()
+				var price = $("input[name='price']").eq(i).val()
+				codeAddress(name,addressmprice);    
+			}
+			$("form")[0].reset();
+			$(".restaurant-data").not(":first").remove();
+			event.preventDefault();
+			
+		});
+	}
+}
+
 $(document).ready(function(){
 	$("#plus").hide();
 	$("#submit").hide();
+	showButtons();
 });
