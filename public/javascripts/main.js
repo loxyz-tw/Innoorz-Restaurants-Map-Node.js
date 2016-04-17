@@ -203,6 +203,7 @@ function showButtons() {
 		});
 		//Post data
 		$("#submit").show();
+		/*
 		$("form").submit(function(event) {
 			
 			var length = $(".restaurant-data").length;
@@ -218,6 +219,7 @@ function showButtons() {
 			event.preventDefault();
 			
 		});
+		*/
 	}
 }
 
