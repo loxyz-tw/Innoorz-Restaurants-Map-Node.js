@@ -18,6 +18,11 @@
             <div id="dochi"></div>
             <button id="goButton" class="btn btn-primary btn-lg">開始選擇</button>
         </div>
+        <div style="padding-bottom:10px;">
+            <div class="page-header"><h1>今天喝什麼？ <small>Today's launch is?</small></h1></div>
+            <div id="drinkdochi"></div>
+            <button id="goDrink" class="btn btn-primary btn-lg">開始選擇</button>
+        </div>
     </div>
     <div class="container">
         <div class="page-header"><h1>餐廳列表 <small>Restaurants List</small></h1></div>
@@ -31,9 +36,20 @@
         </div>
     </div>
     <div class="container">
+        <div class="page-header"><h1>飲料店列表 <small>Drink Shop List</small></h1></div>
+        <div class="row">
+           <div class="col-md-12">
+            <table id="drink-list" class="table table-hover">
+                <thead><tr><th>飲料店名稱</th><th>飲料店地址</th><th>平均價格</th><th>平均評分</th></tr></thead>
+                <tbody></tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div class="page-header"><h1>新增餐廳 <small>Add Restaurant</small></h1></div>
         <form id="restaurantform" class="form row" role="form" action="/add" method="post">
-           <div class="restaurant-data col-md-12">
+           <div class="restaurant-data">
                 <div class="form-group col-md-3">
                     <label class="sr-only">餐廳名稱</label>
                     <input class="form-control input-lg" type="text" name="name" placeholder="餐廳名稱">
@@ -42,25 +58,21 @@
                     <label class="sr-only">餐廳地址</label>
                     <input class="form-control input-lg" type="text" name="address" placeholder="餐廳地址">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-1">
                     <label class="sr-only">平均價格</label>
                     <input class="form-control input-lg" type="text" name="price" placeholder="平均價格">
 				</div>
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-1">
                     <label class="sr-only">平均評分</label>
                     <input class="form-control input-lg" type="text" name="star" placeholder="平均評分">
 				</div>
-            </div>
-			<div class="container">
-				<div class="form-group col-md-2">
-				</div>
-				<div class="form-group col-md-2">
+                <div class="form-group col-md-1">
 					<input class="form-control input-lg" type="text" name="lat" placeholder="緯度">
 				</div>
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-1">
 					<input class="form-control input-lg" type="text" name="lng" placeholder="經度">
 				</div>
-			</div>
+            </div>
 			<div id="buttons" class="col-md-2">
 			<!--
                 <button id="plus" class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
@@ -68,8 +80,43 @@
                 <button id="submit" class="btn btn-primary btn-lg" type="submit">送出</button>
             </div>
         </form>
-		<div id="gSignin" class="g-signin2" data-onsuccess="onSignIn"></div>
-		<div id="gSignout"><a href="" onclick="signOut();">Sign out</a></div>
+        
+        <div class="page-header"><h1>新增飲料店 <small>Add Drink Shop</small></h1></div>
+        <form id="drinkform" class="form row" role="form" action="/add" method="post">
+           <div class="restaurant-data">
+                <div class="form-group col-md-3">
+                    <label class="sr-only">飲料店名稱</label>
+                    <input class="form-control input-lg" type="text" name="name" placeholder="飲料店名稱">
+                </div>
+                <div class="form-group col-md-5">
+                    <label class="sr-only">飲料店地址</label>
+                    <input class="form-control input-lg" type="text" name="address" placeholder="飲料店地址">
+                </div>
+                <div class="form-group col-md-1">
+                    <label class="sr-only">平均價格</label>
+                    <input class="form-control input-lg" type="text" name="price" placeholder="平均價格">
+				</div>
+				<div class="form-group col-md-1">
+                    <label class="sr-only">平均評分</label>
+                    <input class="form-control input-lg" type="text" name="star" placeholder="平均評分">
+				</div>
+                <div class="form-group col-md-1">
+					<input class="form-control input-lg" type="text" name="lat" placeholder="緯度">
+				</div>
+				<div class="form-group col-md-1">
+					<input class="form-control input-lg" type="text" name="lng" placeholder="經度">
+				</div>
+            </div>
+			<div id="buttons" class="col-md-2">
+			<!--
+                <button id="plus" class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+			-->
+                <button id="submit" class="btn btn-primary btn-lg" type="submit">送出</button>
+            </div>
+        </form>
+        
+		<button id="gSignin" class="g-signin2 btn btn-lg btn-danger" data-onsuccess="onSignIn"></button>
+		<button id="gSignout" class="btn btn-lg btn-info"><a href="" onclick="signOut();">Sign out</a></button>
     </div>
 </body>
     <% include ../partials/footer.ejs %>
