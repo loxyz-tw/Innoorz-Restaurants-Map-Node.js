@@ -143,6 +143,7 @@ $("#goButton").on("click",function(){
 	selectWeightedIndex = Math.floor(Math.random()*(restaurantWeight.length));
     selectIndex = restaurantWeight[selectWeightedIndex];
 })
+
 var txtArray = ["今","天","我","要","吃："];
 function dochiAnimation(num){
 	if(num == 3) {
@@ -157,6 +158,33 @@ function dochiAnimation(num){
         timer = setTimeout(function(){dochiAnimation(num)},500);
     }else{
         $("#dochi").append(result).append(" ；距離" + distance).append(" ；步行時間" + duration);
+        clearTimeout(timer);
+    }
+    
+}
+
+$("#goDrink").on("click",function(){
+    $("#drinkdochi").html("");
+	dochiAnimation(0);
+    //get random select index by weighted array
+	selectWeightedIndex = Math.floor(Math.random()*(restaurantWeight.length));
+    selectIndex = restaurantWeight[selectWeightedIndex];
+})
+
+var txtArray = ["今","天","我","要","喝："];
+function dochiAnimation(num){
+	if(num == 3) {
+		getDistanceAndDuration(selectIndex);
+		result = (restaurantName[selectIndex]) + " ；平均價格" + restaurantPrice[selectIndex];
+		$("#drinkdochi").append(txtArray[num]);
+		num++;
+        timer = setTimeout(function(){dochiAnimation(num)},500);
+	}else if(num < 5){
+        $("#drinkdochi").append(txtArray[num]);
+        num++;
+        timer = setTimeout(function(){dochiAnimation(num)},500);
+    }else{
+        $("#drinkdochi").append(result).append(" ；距離" + distance).append(" ；步行時間" + duration);
         clearTimeout(timer);
     }
     
