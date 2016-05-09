@@ -234,7 +234,7 @@ function showButtons() {
 		});
 		*/
 		//Post data
-		$("#submit").show();
+		//$("#submit").show();
 		/*
 		$("form").submit(function(event) {
 			
