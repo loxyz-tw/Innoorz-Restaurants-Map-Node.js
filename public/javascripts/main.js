@@ -234,7 +234,7 @@ function showButtons() {
 		});
 		*/
 		//Post data
-		//$("#submit").show();
+		$(".submit").show();
 		/*
 		$("form").submit(function(event) {
 			
@@ -262,7 +262,7 @@ function showButtons() {
 
 $(document).ready(function(){
 //	$("#plus").hide();
-	$("#submit").hide();
+	$(".submit").hide();
 	$("#gSignout").hide();
 	showButtons();
 });
