@@ -4,6 +4,11 @@ var restaurantPrice = [];
 var restaurantLat = [];
 var restaurantLng = [];
 var restaurantWeight = [];
+var drinkName = [];
+var drinkPrice = [];
+var drinkLat = [];
+var drinkLng = [];
+var drinkWeight = [];
 var distance;
 var duration;
 var timer;
@@ -47,6 +52,8 @@ function initMap() {
         ResInfo.open(map, inno);
     });
     restaurantList();
+    weightingRestaurant();
+    weightingDrink();
 }
 
 function onSignIn(googleUser) {
@@ -72,44 +79,75 @@ function signOut() {
 
 //List Restaurant
 function restaurantList(){
-    $.getJSON("/api/v1/restaurant").then(function(data){
+    $.getJSON("/api/v1/listall").then(function(data){
 //	$.getJSON("../restaurants.json").then(function(data){
         var tableRow = "";
 		
         for(var i=0;i<data.length;i++){
 			
             var restaurant = "";
+            var iconLink = "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
+            
             restaurant += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td><td>"+(data[i].star/10).toFixed(1)+"</td>");
             tableRow += ("<tr>"+restaurant+"</tr>");
-            restaurantName.push(data[i].name);
-			restaurantPrice.push(data[i].price);
-			restaurantLat.push(data[i].lat);
-			restaurantLng.push(data[i].lng);
-            //Create a weighted array
-            for(var j=0; j<Math.pow(2, (data[i].star)/10); j++)
-                restaurantWeight.push(i);
-			
+            if(data[i].cat == 1) {
+	            restaurantName.push(data[i].name);
+				restaurantPrice.push(data[i].price);
+				restaurantLat.push(data[i].lat);
+				restaurantLng.push(data[i].lng);
+				iconLink = "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+            }else{
+            	drinkName.push(data[i].name);
+				drinkPrice.push(data[i].price);
+				drinkLat.push(data[i].lat);
+				drinkLng.push(data[i].lng);
+            }
             var latlng = {lat: data[i].lat,lng: data[i].lng};
             var name = data[i].name;
             var address = data[i].address;
             var price = data[i].price;
             var star = data[i].star;
+            var phone = data[i].phone;
 
             var marker = new google.maps.Marker({
                 map: map,
                 animation : google.maps.Animation.DROP,
-                position: latlng
+                position: latlng,
+                icon : iconLink
             });
             var content = "<h3>"+name+"</h3>"+
                 "<p>地址："+address+"</p>"+
                 "<p>平均價格："+price+"</p>"+
-                "<p>平均評分："+(star/10).toFixed(1)+"</p>";
+                "<p>平均評分："+(star/10).toFixed(1)+"</p>"
+                "<p>電話："+phone+"</p>";
             
             mapInfo(marker,map,content);
         }
         $("#restaurant-list tbody").html(tableRow);
     })
 	
+}
+
+//Weighting Restaurant
+function weightingRestaurant(){
+    $.getJSON("/api/v1/restaurant").then(function(data){
+        for(var i=0;i<data.length;i++){
+            //Create a weighted array
+            for(var j=0; j<Math.pow(2, (data[i].star)/10); j++)
+                restaurantWeight.push(i);
+        }
+    })
+}
+
+//Weighting Drink
+function weightingDrink(){
+    $.getJSON("/api/v1/drink").then(function(data){
+        for(var i=0;i<data.length;i++){
+            //Create a weighted array
+            for(var j=0; j<Math.pow(2, (data[i].star)/10); j++)
+                drinkWeight.push(i);
+        }
+    })
 }
 
 function mapInfo(marker,map,content){
@@ -128,20 +166,19 @@ function codeAddress(name,address,price){
             var location = results[0].geometry.location.split(",");
             var restaurantArray = [{"name":name, "address":address, lat: location[0],lng: location[1], "price":price}];
             var json = JSON.stringify(restaurantArray)
-            
         }
     })
 }
 
 var result;
-var selectWeightedIndex, selectIndex;
+var selectRestaurantWeightedIndex, selectDrinkWeightedIndex, selectRestaurantIndex, selectDrinkIndex;
 //random for restaurant
 $("#goButton").on("click",function(){
     $("#dochi").html("");
 	dochiAnimation(0);
     //get random select index by weighted array
-	selectWeightedIndex = Math.floor(Math.random()*(restaurantWeight.length));
-    selectIndex = restaurantWeight[selectWeightedIndex];
+	selectselectRestaurantWeightedIndex = Math.floor(Math.random()*(restaurantWeight.length));
+    selectRestaurantIndex = restaurantWeight[selectRestaurantWeightedIndex];
 })
 
 var txtArray = ["今","天","我","要","吃："];
@@ -167,15 +204,15 @@ $("#goDrink").on("click",function(){
     $("#drinkdochi").html("");
 	drinkAnimation(0);
     //get random select index by weighted array
-	selectWeightedIndex = Math.floor(Math.random()*(restaurantWeight.length));
-    selectIndex = restaurantWeight[selectWeightedIndex];
+	selectDrinkWeightedIndex = Math.floor(Math.random()*(drinkWeight.length));
+    selectDrinkIndex = restaurantWeight[selectDrinkWeightedIndex];
 })
 
 var drinkArray = ["今","天","我","要","喝："];
 function drinkAnimation(num){
 	if(num == 3) {
 		getDistanceAndDuration(selectIndex);
-		result = (restaurantName[selectIndex]) + " ；平均價格" + restaurantPrice[selectIndex];
+		result = (drinkName[selectIndex]) + " ；平均價格" + drinkPrice[selectIndex];
 		$("#drinkdochi").append(drinkArray[num]);
 		num++;
         timer = setTimeout(function(){drinkAnimation(num)},500);
