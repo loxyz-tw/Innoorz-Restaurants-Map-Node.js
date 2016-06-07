@@ -231,12 +231,14 @@ function getDistanceAndDuration(index, type) {
 	directionsDisplay.setMap(map);
 	var source = "25.041004,121.537734"
 	var destination;
+	console.log(type);
 	if(type == 0) {
 		destination = drinkLat[index] + "," + drinkLng[index];
 	}
 	else{
 		destination = restaurantLat[index] + "," + restaurantLng[index];
 	}
+	console.log(destination);
 	
 	var request = {
 		origin: source,
