@@ -75,7 +75,7 @@ app.get('/api/v1/drink', function(req, res) {
         }
 
         // SQL Query > Select Data
-        var query = client.query("SELECT * FROM inno_restaurant WHERE cat = 0 ORDER BY star DESC");
+        var query = client.query("SELECT * FROM inno_restaurant WHERE cat = '0' ORDER BY star DESC");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -106,7 +106,7 @@ app.get('/api/v1/restaurant', function(req, res) {
         }
 
         // SQL Query > Select Data
-        var query = client.query("SELECT * FROM inno_restaurant WHERE cat = 1 ORDER BY star DESC");
+        var query = client.query("SELECT * FROM inno_restaurant WHERE cat = '1' ORDER BY star DESC");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -144,8 +144,8 @@ app.post("/add", function(req, res){
           return res.status(500).json({ success: false, data: err});
         }
         // SQL Query > Insert Data
-		var query = client.query("INSERT INTO inno_restaurant(name, address, lat, lng, price, star) " + 
-			"VALUES ($1, $2, $3, $4, $5, $6)", [name, address, lat, lng, price, star], function(err, result){
+		var query = client.query("INSERT INTO inno_restaurant(name, address, lat, lng, price, star, cat) " + 
+			"VALUES ($1, $2, $3, $4, $5, $6, $7)", [name, address, lat, lng, price, star, cat], function(err, result){
 				if(err) {
 					console.log(err);
 				} else {
