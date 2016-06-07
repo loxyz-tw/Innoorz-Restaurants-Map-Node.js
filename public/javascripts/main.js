@@ -90,7 +90,7 @@ function restaurantList(){
             
             restaurant += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td><td>"+(data[i].star/10).toFixed(1)+"</td>");
             tableRow += ("<tr>"+restaurant+"</tr>");
-            if(data[i].cat == 1) {
+            if(data[i].cat == '1') {
 	            restaurantName.push(data[i].name);
 				restaurantPrice.push(data[i].price);
 				restaurantLat.push(data[i].lat);
@@ -231,15 +231,13 @@ function getDistanceAndDuration(index, type) {
 	directionsDisplay.setMap(map);
 	var source = "25.041004,121.537734"
 	var destination;
-	console.log(type);
 	if(type == 0) {
 		destination = drinkLat[index] + "," + drinkLng[index];
 	}
 	else{
 		destination = restaurantLat[index] + "," + restaurantLng[index];
 	}
-	console.log(destination);
-	
+
 	var request = {
 		origin: source,
 		destination: destination,
