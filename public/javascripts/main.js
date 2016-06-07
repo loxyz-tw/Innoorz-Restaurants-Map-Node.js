@@ -118,7 +118,7 @@ function restaurantList(){
             var content = "<h3>"+name+"</h3>"+
                 "<p>地址："+address+"</p>"+
                 "<p>平均價格："+price+"</p>"+
-                "<p>平均評分："+(star/10).toFixed(1)+"</p>"
+                "<p>平均評分："+(star/10).toFixed(1)+"</p>"+
                 "<p>電話："+phone+"</p>";
             
             mapInfo(marker,map,content);
