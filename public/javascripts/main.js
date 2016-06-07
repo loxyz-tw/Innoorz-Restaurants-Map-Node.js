@@ -119,8 +119,8 @@ function restaurantList(){
                 "<p>地址："+address+"</p>"+
                 "<p>平均價格："+price+"</p>"+
                 "<p>平均評分："+(star/10).toFixed(1)+"</p>"+
-                "<p>電話："+phone+"</p>";
-            
+                "<p><a href='tel:" + phone + "'>" + phone + "</a></p>";
+
             mapInfo(marker,map,content);
         }
         $("#restaurant-list tbody").html(tableRow);
