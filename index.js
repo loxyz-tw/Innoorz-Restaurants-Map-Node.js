@@ -44,7 +44,38 @@ app.get('/api/v1/restaurant', function(req, res) {
         }
 
         // SQL Query > Select Data
-        var query = client.query("SELECT * FROM inno_restaurant ORDER BY star DESC");
+        var query = client.query("SELECT * FROM inno_restaurant WHERE cat = 1 ORDER BY star DESC");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+
+});
+
+app.get('/api/v1/drink', function(req, res) {
+    var connectionString = process.env.DATABASE_URL;
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+        var query = client.query("SELECT * FROM inno_restaurant WHERE cat = 0 ORDER BY star DESC");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
