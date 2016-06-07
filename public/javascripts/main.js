@@ -184,8 +184,8 @@ $("#goButton").on("click",function(){
 var txtArray = ["今","天","我","要","吃："];
 function dochiAnimation(num){
 	if(num == 3) {
-		getDistanceAndDuration(selectIndex);
-		result = (restaurantName[selectIndex]) + " ；平均價格" + restaurantPrice[selectIndex];
+		getDistanceAndDuration(selectRestaurantIndex);
+		result = (restaurantName[selectRestaurantIndex]) + " ；平均價格" + restaurantPrice[selectRestaurantIndex];
 		$("#dochi").append(txtArray[num]);
 		num++;
         timer = setTimeout(function(){dochiAnimation(num)},500);
@@ -211,8 +211,8 @@ $("#goDrink").on("click",function(){
 var drinkArray = ["今","天","我","要","喝："];
 function drinkAnimation(num){
 	if(num == 3) {
-		getDistanceAndDuration(selectIndex);
-		result = (drinkName[selectIndex]) + " ；平均價格" + drinkPrice[selectIndex];
+		getDistanceAndDuration(selectDrinkIndex);
+		result = (drinkName[selectDrinkIndex]) + " ；平均價格" + drinkPrice[selectDrinkIndex];
 		$("#drinkdochi").append(drinkArray[num]);
 		num++;
         timer = setTimeout(function(){drinkAnimation(num)},500);
