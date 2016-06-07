@@ -184,7 +184,7 @@ $("#goButton").on("click",function(){
 var txtArray = ["今","天","我","要","吃："];
 function dochiAnimation(num){
 	if(num == 3) {
-		getDistanceAndDuration(selectRestaurantIndex);
+		getDistanceAndDuration(selectRestaurantIndex, 1);
 		result = (restaurantName[selectRestaurantIndex]) + " ；平均價格" + restaurantPrice[selectRestaurantIndex];
 		$("#dochi").append(txtArray[num]);
 		num++;
@@ -211,7 +211,7 @@ $("#goDrink").on("click",function(){
 var drinkArray = ["今","天","我","要","喝："];
 function drinkAnimation(num){
 	if(num == 3) {
-		getDistanceAndDuration(selectDrinkIndex);
+		getDistanceAndDuration(selectDrinkIndex, 0);
 		result = (drinkName[selectDrinkIndex]) + " ；平均價格" + drinkPrice[selectDrinkIndex];
 		$("#drinkdochi").append(drinkArray[num]);
 		num++;
@@ -227,10 +227,14 @@ function drinkAnimation(num){
     
 }
 
-function getDistanceAndDuration(index) {
+function getDistanceAndDuration(index, type) {
 	directionsDisplay.setMap(map);
 	var source = "25.041004,121.537734"
-	var destination = restaurantLat[index]+","+restaurantLng[index]
+	var destination;
+	if(type == 0)
+		destination = drinkLat[index] + "," + drinkLng[index];
+	else
+		destination = restaurantLat[index] + "," + restaurantLng[index];
 	
 	var request = {
 		origin: source,
