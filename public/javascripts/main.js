@@ -205,7 +205,7 @@ $("#goDrink").on("click",function(){
 	drinkAnimation(0);
     //get random select index by weighted array
 	selectDrinkWeightedIndex = Math.floor(Math.random()*(drinkWeight.length));
-    selectDrinkIndex = restaurantWeight[selectDrinkWeightedIndex];
+    selectDrinkIndex = drinkWeight[selectDrinkWeightedIndex];
 })
 
 var drinkArray = ["今","天","我","要","喝："];
