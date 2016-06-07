@@ -91,7 +91,6 @@ function restaurantList(){
             restaurant += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td><td>"+(data[i].star/10).toFixed(1)+"</td>");
             tableRow += ("<tr>"+restaurant+"</tr>");
             if(data[i].cat == '1') {
-            	console.log(data[i]);
 	            restaurantName.push(data[i].name);
 				restaurantPrice.push(data[i].price);
 				restaurantLat.push(data[i].lat);
@@ -178,7 +177,7 @@ $("#goButton").on("click",function(){
     $("#dochi").html("");
 	dochiAnimation(0);
     //get random select index by weighted array
-	selectselectRestaurantWeightedIndex = Math.floor(Math.random()*(restaurantWeight.length));
+	selectRestaurantWeightedIndex = Math.floor(Math.random()*(restaurantWeight.length));
     selectRestaurantIndex = restaurantWeight[selectRestaurantWeightedIndex];
 })
 
