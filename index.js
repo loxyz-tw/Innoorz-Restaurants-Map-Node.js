@@ -28,7 +28,7 @@ app.get('/db', function (request, response) {
   });
 })
 
-app.get('/api/v1/restaurant', function(req, res) {
+app.get('/api/v1/listall', function(req, res) {
 //	var connectionString = "postgres://twzeobmbmpaljl:rxezNy-qPvJ0TUsrpMPCZc0iaX@ec2-23-21-157-223.compute-1.amazonaws.com:5432/d7m5nep2mhtjhe?ssl=true";
 	var connectionString = process.env.DATABASE_URL;
 //	var connectionString = 'postgres://localhost:5432/';
@@ -44,7 +44,7 @@ app.get('/api/v1/restaurant', function(req, res) {
         }
 
         // SQL Query > Select Data
-        var query = client.query("SELECT * FROM inno_restaurant WHERE cat = 1 ORDER BY star DESC");
+        var query = client.query("SELECT * FROM inno_restaurant ORDER BY cat DESC, star DESC");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -76,6 +76,37 @@ app.get('/api/v1/drink', function(req, res) {
 
         // SQL Query > Select Data
         var query = client.query("SELECT * FROM inno_restaurant WHERE cat = 0 ORDER BY star DESC");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+
+});
+
+app.get('/api/v1/restaurant', function(req, res) {
+    var connectionString = process.env.DATABASE_URL;
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+        var query = client.query("SELECT * FROM inno_restaurant WHERE cat = 1 ORDER BY star DESC");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
