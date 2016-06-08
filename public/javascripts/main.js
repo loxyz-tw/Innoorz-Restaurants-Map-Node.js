@@ -81,22 +81,27 @@ function signOut() {
 function restaurantList(){
     $.getJSON("/api/v1/listall").then(function(data){
 //	$.getJSON("../restaurants.json").then(function(data){
-        var tableRow = "";
+        var tableRowRestaurant = "";
+        var tableRowDrink = "";
 		
         for(var i=0;i<data.length;i++){
 			
             var restaurant = "";
+            var drink = "";
             var iconLink = "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
+
             
-            restaurant += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td><td>"+(data[i].star/10).toFixed(1)+"</td>");
-            tableRow += ("<tr>"+restaurant+"</tr>");
             if(data[i].cat == '1') {
+            	restaurant += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td><td>"+(data[i].star/10).toFixed(1)+"</td>");
+            	tableRowRestaurant += ("<tr>"+restaurant+"</tr>");
 	            restaurantName.push(data[i].name);
 				restaurantPrice.push(data[i].price);
 				restaurantLat.push(data[i].lat);
 				restaurantLng.push(data[i].lng);
 				iconLink = "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
             }else{
+            	drink += ("<td class='res'>"+data[i].name+"</td><td>"+data[i].address+"</td><td>"+data[i].price+"</td><td>"+(data[i].star/10).toFixed(1)+"</td>");
+            	tableRowDrink += ("<tr>"+drink+"</tr>");
             	drinkName.push(data[i].name);
 				drinkPrice.push(data[i].price);
 				drinkLat.push(data[i].lat);
@@ -123,7 +128,8 @@ function restaurantList(){
 
             mapInfo(marker,map,content);
         }
-        $("#restaurant-list tbody").html(tableRow);
+        $("#restaurant-list tbody").html(tableRowRestaurant);
+        $("#drink-list tbody").html(tableRowDrink);
     })
 	
 }
