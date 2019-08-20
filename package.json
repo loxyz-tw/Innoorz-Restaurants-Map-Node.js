@@ -7,10 +7,10 @@
     "start": "node index.js"
   },
   "dependencies": {
-	"pg": "4.x",
-    "ejs": "2.3.3",
-    "express": "4.13.3",
-	"body-parser": "1.15.0"
+    "body-parser": "^1.19.0",
+    "ejs": "2.6.2",
+    "express": "^4.17.1",
+    "pg": "7.12.1"
   },
   "engines": {
     "node": "0.12.7"
